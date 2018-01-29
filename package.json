@@ -1,0 +1,24 @@
+{
+  "name": "svg-maximize",
+  "version": "1.0.0",
+  "description": "Resize SVG viewBox coordinate system to cover entire browser viewport",
+  "main": "svg-maximize.js",
+  "repository": {
+    "url": "https://github.com/jsneden/svg-maximize",
+    "type": "git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jeff Sneden <jeff@agencyautonomous.com>",
+  "license": "MIT",
+  "dependencies": {
+    "verge": "^1.10.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.38",
+    "@babel/preset-env": "^7.0.0-beta.38",
+    "babel-loader": "^8.0.0-beta.0",
+    "webpack": "^3.10.0"
+  }
+}
