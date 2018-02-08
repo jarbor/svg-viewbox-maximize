@@ -92,20 +92,23 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var SvgMaximize =
 /*#__PURE__*/
 function () {
-  function SvgMaximize(element) {
+  function SvgMaximize(element, onResize) {
     _classCallCheck(this, SvgMaximize);
 
     this.element = element;
+    this.onResize = onResize;
     this.original = {};
 
     var _element$getAttribute = this.element.getAttribute('viewBox').split(' ').map(Number);
 
     var _element$getAttribute2 = _slicedToArray(_element$getAttribute, 4);
 
-    this.original.originX = _element$getAttribute2[0];
-    this.original.originY = _element$getAttribute2[1];
+    this.original.left = _element$getAttribute2[0];
+    this.original.top = _element$getAttribute2[1];
     this.original.width = _element$getAttribute2[2];
     this.original.height = _element$getAttribute2[3];
+    this.original.bottom = this.original.top + this.original.height;
+    this.original.right = this.original.left + this.original.width;
     this.current = Object.assign({}, this.original);
     this.resize();
     window.addEventListener('resize', this.resize.bind(this));
@@ -121,15 +124,47 @@ function () {
       if (windowRatio > svgRatio) {
         // Window wider than SVG
         this.current.width = this.original.height * windowRatio;
-        this.current.originX = this.original.originX + (this.original.width - this.current.width) / 2;
+        this.current.left = this.original.left + (this.original.width - this.current.width) / 2;
+        this.current.right = this.current.left + this.current.width;
       } else if (windowRatio < svgRatio) {
         // Window taller than SVG
         this.current.height = this.original.width / windowRatio;
-        this.current.originY = this.original.originY + (this.original.height - this.current.height) / 2;
+        this.current.top = this.original.top + (this.original.height - this.current.height) / 2;
+        this.current.bottom = this.current.top + this.current.height;
       } // Perform the resize
 
 
-      this.element.setAttribute('viewBox', "".concat(this.current.originX, " ").concat(this.current.originY, " ").concat(this.current.width, " ").concat(this.current.height));
+      this.element.setAttribute('viewBox', "".concat(this.current.left, " ").concat(this.current.top, " ").concat(this.current.width, " ").concat(this.current.height)); // Perform the callback
+
+      this.onResize && this.onResize.call(this);
+    }
+  }, {
+    key: "svgX",
+    value: function svgX(viewportX) {
+      var viewportRatio = viewportX / _verge.default.viewportW();
+
+      return this.current.left + viewportRatio * this.current.width;
+    }
+  }, {
+    key: "svgY",
+    value: function svgY(viewportY) {
+      var viewportRatio = viewportY / _verge.default.viewportH();
+
+      return this.current.top + viewportRatio * this.current.height;
+    }
+  }, {
+    key: "rectangle",
+    value: function rectangle(element) {
+      var rectangle = _verge.default.rectangle(element);
+
+      return {
+        top: this.svgY(rectangle.top),
+        bottom: this.svgY(rectangle.bottom),
+        left: this.svgX(rectangle.left),
+        right: this.svgX(rectangle.right),
+        height: this.svgY(rectangle.height),
+        width: this.svgX(rectangle.width)
+      };
     }
   }]);
 
