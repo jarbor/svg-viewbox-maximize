@@ -1,9 +1,10 @@
 import verge from 'verge';
 
 class SvgMaximize {
-	constructor(element, onResize) {
-		this.element = element;
-		this.onResize = onResize;
+	constructor(config) {
+		this.element = config.element;
+		this.container = config.container || config.element.parentElement;
+		this.resized = config.resized;
 
 		this.original = {};
 		[this.original.left, this.original.top, this.original.width, this.original.height] =
@@ -18,16 +19,16 @@ class SvgMaximize {
 	}
 
 	resize() {
-		let windowRatio = verge.viewportW() / verge.viewportH();
 		let svgRatio = this.original.width / this.original.height;
-
-		if (windowRatio > svgRatio) { // Window wider than SVG
-			this.current.width = this.original.height * windowRatio;
+		let containerRatio = this.containerRatio;
+		
+		if (containerRatio > svgRatio) { // Window wider than SVG
+			this.current.width = this.original.height * containerRatio;
 			this.current.left = this.original.left + (this.original.width - this.current.width) / 2;
 			this.current.right = this.current.left + this.current.width;
 		}
-		else if (windowRatio < svgRatio) { // Window taller than SVG
-			this.current.height = this.original.width / windowRatio;
+		else if (containerRatio < svgRatio) { // Window taller than SVG
+			this.current.height = this.original.width / containerRatio;
 			this.current.top = this.original.top + (this.original.height - this.current.height) / 2;
 			this.current.bottom = this.current.top + this.current.height;
 		}
@@ -36,17 +37,19 @@ class SvgMaximize {
 		this.element.setAttribute('viewBox', `${this.current.left} ${this.current.top} ${this.current.width} ${this.current.height}`);
 
 		// Perform the callback
-		this.onResize && this.onResize.call(this);
+		this.resized && this.resized.call(this);
+	}
+
+	get containerRatio() {
+		return this.container.clientWidth / this.container.clientHeight;
 	}
 
 	svgX(viewportX) {
-		let viewportRatio = viewportX / verge.viewportW();
-		return this.current.left + viewportRatio * this.current.width;
+		return this.current.left + this.containerRatio * this.current.width;
 	}
 
 	svgY(viewportY) {
-		let viewportRatio = viewportY / verge.viewportH();
-		return this.current.top + viewportRatio * this.current.height;
+		return this.current.top + this.containerRatio * this.current.height;
 	}
 
 	rectangle(element) {

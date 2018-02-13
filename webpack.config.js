@@ -8,7 +8,9 @@ module.exports = {
 	},
 	output: {
 		filename: '[name].js',
-		path: path.resolve(__dirname)
+		path: path.resolve(__dirname),
+		library: 'SvgMaximize',
+		libraryExport: 'default'
 	},
 	module: {
 		rules: [{

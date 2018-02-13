@@ -1,3 +1,4 @@
+var SvgMaximize =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -92,11 +93,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var SvgMaximize =
 /*#__PURE__*/
 function () {
-  function SvgMaximize(element, onResize) {
+  function SvgMaximize(config) {
     _classCallCheck(this, SvgMaximize);
 
-    this.element = element;
-    this.onResize = onResize;
+    this.element = config.element;
+    this.container = config.container || config.element.parentElement;
+    this.resized = config.resized;
     this.original = {};
 
     var _element$getAttribute = this.element.getAttribute('viewBox').split(' ').map(Number);
@@ -117,18 +119,17 @@ function () {
   _createClass(SvgMaximize, [{
     key: "resize",
     value: function resize() {
-      var windowRatio = _verge.default.viewportW() / _verge.default.viewportH();
-
       var svgRatio = this.original.width / this.original.height;
+      var containerRatio = this.containerRatio;
 
-      if (windowRatio > svgRatio) {
+      if (containerRatio > svgRatio) {
         // Window wider than SVG
-        this.current.width = this.original.height * windowRatio;
+        this.current.width = this.original.height * containerRatio;
         this.current.left = this.original.left + (this.original.width - this.current.width) / 2;
         this.current.right = this.current.left + this.current.width;
-      } else if (windowRatio < svgRatio) {
+      } else if (containerRatio < svgRatio) {
         // Window taller than SVG
-        this.current.height = this.original.width / windowRatio;
+        this.current.height = this.original.width / containerRatio;
         this.current.top = this.original.top + (this.original.height - this.current.height) / 2;
         this.current.bottom = this.current.top + this.current.height;
       } // Perform the resize
@@ -136,21 +137,17 @@ function () {
 
       this.element.setAttribute('viewBox', "".concat(this.current.left, " ").concat(this.current.top, " ").concat(this.current.width, " ").concat(this.current.height)); // Perform the callback
 
-      this.onResize && this.onResize.call(this);
+      this.resized && this.resized.call(this);
     }
   }, {
     key: "svgX",
     value: function svgX(viewportX) {
-      var viewportRatio = viewportX / _verge.default.viewportW();
-
-      return this.current.left + viewportRatio * this.current.width;
+      return this.current.left + this.containerRatio * this.current.width;
     }
   }, {
     key: "svgY",
     value: function svgY(viewportY) {
-      var viewportRatio = viewportY / _verge.default.viewportH();
-
-      return this.current.top + viewportRatio * this.current.height;
+      return this.current.top + this.containerRatio * this.current.height;
     }
   }, {
     key: "rectangle",
@@ -165,6 +162,11 @@ function () {
         height: this.svgY(rectangle.height),
         width: this.svgX(rectangle.width)
       };
+    }
+  }, {
+    key: "containerRatio",
+    get: function get() {
+      return this.container.clientWidth / this.container.clientHeight;
     }
   }]);
 
@@ -342,4 +344,4 @@ exports.default = _default;
 
 
 /***/ })
-/******/ ]);
+/******/ ])["default"];
