@@ -1,5 +1,5 @@
-# svg-maximize
-<b>SVG Maximize</b> is a utility for resizing the viewBox coordinate system of an inline SVG so that it covers the entire browser viewport (or a container element) <i>without</i> resizing the SVG's contents.
+# svg-viewbox-maximize
+<b>SVG ViewBox Maximize</b> is a utility for resizing the viewbox coordinate system of an inline SVG so that it covers the entire browser viewbox (or a container element) <i>without</i> resizing the SVG's contents.
 
 ## Why is this a problem?
 Inline SVGs are a powerful native tool for imaging and animation. However, browsers and devices come in all shapes and sizes while SVGs require fixed aspect ratio coordinate systems to ensure consistent rendering of the components. This leaves us with a few obvious options when scaling an image to a different aspect ratio using the `preserveAspectRatio` attribute of an SVG:
@@ -19,7 +19,7 @@ Inline SVGs are a powerful native tool for imaging and animation. However, brows
 <i>Note: Amelia Bellamy-Royds gives a great primer on SVG scaling over at [CSS Tricks](https://css-tricks.com/scale-svg/).</i>
 
 ## We can do better!
-Since SVGs are image instructions rather than a rendered image, we can modify the SVG to better suit our modified aspect ratio by scaling specific objects in the SVG differently than the SVG viewport.
+Since SVGs are image instructions rather than a rendered image, we can modify the SVG to better suit our modified aspect ratio by scaling specific objects in the SVG differently than the SVG viewbox.
 
 | ![Contained SVG](examples/images/resized-rendered.png) |
 |:--:|
@@ -28,4 +28,4 @@ Since SVGs are image instructions rather than a rendered image, we can modify th
 ### Can't individual object scaling be accomplished by nesting SVGs with different `preserveAspectRatio` settings?
 Yes! If you can appropriately break apart your SVG into sub-SVGs to control the element scaling and you have no need for complex animation, then that is a preferrable approach as no JavaScript is required to perform the resizing. Again, see the [CSS Tricks primer on SVG scaling](https://css-tricks.com/scale-svg/) for more information on the nested SVG approach.
 
-This library exists to allow you to scale the SVG viewport while <i>selectively</i> scaling the internal SVG elements.
+This library exists to allow you to scale the SVG viewbox while <i>selectively</i> scaling the internal SVG elements.
