@@ -1,3 +1,4 @@
+import ElementCoordinates from 'element-coordinates';
 import verge from 'verge';
 
 class SvgMaximize {
@@ -45,15 +46,17 @@ class SvgMaximize {
 	}
 
 	svgX(viewportX) {
-		return this.current.left + this.containerRatio * this.current.width;
+		let fractionX = viewportX / (document.body.clientWidth || document.width);
+		return this.current.left + fractionX * this.current.width;
 	}
 
 	svgY(viewportY) {
-		return this.current.top + this.containerRatio * this.current.height;
+		let fractionY = viewportY / (document.body.clientHeight || document.height);
+		return this.current.top + fractionY * this.current.height;
 	}
 
 	rectangle(element) {
-		let rectangle = verge.rectangle(element);
+		let rectangle = new ElementCoordinates(element).contentBox;
 		return {
 			top: this.svgY(rectangle.top),
 			bottom: this.svgY(rectangle.bottom),

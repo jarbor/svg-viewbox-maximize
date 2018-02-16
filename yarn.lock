@@ -979,6 +979,10 @@ electron-to-chromium@^1.3.30:
   version "1.3.31"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.31.tgz#00d832cba9fe2358652b0c48a8816c8e3a037e9f"
 
+element-coordinates@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/element-coordinates/-/element-coordinates-1.0.2.tgz#108bcf00aa6bae02876c75af3206b6406b19ba0d"
+
 elliptic@^6.0.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.4.0.tgz#cac9af8762c85836187003c8dfe193e5e2eae5df"

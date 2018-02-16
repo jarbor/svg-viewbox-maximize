@@ -13,12 +13,13 @@
   "author": "Jeff Sneden <jeff@agencyautonomous.com>",
   "license": "MIT",
   "dependencies": {
+    "element-coordinates": "^1.0.4",
     "verge": "^1.10.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.38",
-    "@babel/preset-env": "^7.0.0-beta.38",
+    "@babel/core": "^7.0.0-beta.40",
+    "@babel/preset-env": "^7.0.0-beta.40",
     "babel-loader": "^8.0.0-beta.0",
-    "webpack": "^3.10.0"
+    "webpack": "^3.11.0"
   }
 }

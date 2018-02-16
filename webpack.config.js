@@ -10,6 +10,7 @@ module.exports = {
 		filename: '[name].js',
 		path: path.resolve(__dirname),
 		library: 'SvgMaximize',
+		libraryTarget: 'umd',
 		libraryExport: 'default'
 	},
 	module: {
