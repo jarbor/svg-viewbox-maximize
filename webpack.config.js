@@ -3,13 +3,13 @@ const webpack = require('webpack');
 
 module.exports = {
 	entry: {
-		'svg-maximize': './src/svg-maximize.js',
-		'svg-maximize.min': './src/svg-maximize.js'
+		'svg-viewbox-maximize': './src/svg-viewbox-maximize.js',
+		'svg-viewbox-maximize.min': './src/svg-viewbox-maximize.js'
 	},
 	output: {
 		filename: '[name].js',
 		path: path.resolve(__dirname),
-		library: 'SvgMaximize',
+		library: 'SvgViewboxMaximize',
 		libraryTarget: 'umd',
 		libraryExport: 'default'
 	},

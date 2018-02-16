@@ -1,10 +1,10 @@
 {
-  "name": "svg-maximize",
+  "name": "svg-viewbox-maximize",
   "version": "1.0.0",
-  "description": "Resize SVG viewBox coordinate system to cover entire browser viewport",
-  "main": "svg-maximize.js",
+  "description": "Resize SVG viewBox coordinate system to cover container element. Also includes a utility for translating between page coordinates and SVG coordinates.",
+  "main": "svg-viewbox-maximize.js",
   "repository": {
-    "url": "https://github.com/jsneden/svg-maximize",
+    "url": "https://github.com/jsneden/svg-viewbox-maximize",
     "type": "git"
   },
   "scripts": {
