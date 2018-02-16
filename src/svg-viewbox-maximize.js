@@ -1,5 +1,4 @@
 import ElementCoordinates from 'element-coordinates';
-import verge from 'verge';
 
 class SvgMaximize {
 	constructor(config) {
@@ -56,7 +55,7 @@ class SvgMaximize {
 	}
 
 	rectangle(element) {
-		let rectangle = new ElementCoordinates(element).contentBox;
+		let rectangle = new ElementCoordinates(element).paddingBox;
 		return {
 			top: this.svgY(rectangle.top),
 			bottom: this.svgY(rectangle.bottom),
