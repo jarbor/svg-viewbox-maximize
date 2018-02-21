@@ -29,3 +29,38 @@ Since SVGs are image instructions rather than a rendered image, we can modify th
 Yes! If you can appropriately break apart your SVG into sub-SVGs to control the element scaling and you have no need for complex animation, then that is a preferrable approach as no JavaScript is required to perform the resizing. Again, see the [CSS Tricks primer on SVG scaling](https://css-tricks.com/scale-svg/) for more information on the nested SVG approach.
 
 This library exists to allow you to scale the SVG viewbox while <i>selectively</i> scaling the internal SVG elements.
+
+## Installation
+```
+yarn add svg-viewbox-maximize
+```
+
+### ES6
+```js
+import ElementCoordinates from 'svg-viewbox-maximize';
+```
+
+### CommonJS
+```js
+var ElementCoordinates = require('svg-viewbox-maximize');
+```
+
+### Global Script Include
+```html
+<script src="svg-viewbox-maximize.js">
+```
+
+## Usage
+To begin using SvgViewboxMaximize, invoke the constructor with a config object containing a reference to the SVG to be managed and a callback which will update the internal elements of the SVG on resize:
+```js
+var svg = new SvgViewboxMaximize({
+  svg: $('svg#my-svg'),
+  resized: function() {
+    // Resize SVG internals as desired... access updated viewbox coordinates via this.current
+  }
+});
+```
+
+This will cause the viewbox to be recalculated anytime the SVG element is forced to resize due to the browser viewport changing. The updated viewbox coordinates can be accessed inside the `resized` callback via `this.current` or outside the callback using the saved instance - `svg.current`.
+
+### API
