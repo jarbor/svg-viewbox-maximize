@@ -106,7 +106,7 @@ function () {
     _classCallCheck(this, SvgMaximize);
 
     this.element = config.element;
-    this.container = config.container || config.element.parentElement;
+    this.container = config.container || config.element;
     this.resized = config.resized;
     this.original = {};
 

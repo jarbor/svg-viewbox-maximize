@@ -26,7 +26,7 @@ $$('svg').forEach((svg, index) => {
 });
 
 new SvgMaximize({
-	element: $('.svg-maximize svg'),
+	svg: $('.svg-maximize svg'),
 	resized: function() {
 		let boundary = this.current;
 

@@ -2,13 +2,18 @@ import ElementCoordinates from 'element-coordinates';
 
 class SvgMaximize {
 	constructor(config) {
-		this.element = config.element;
-		this.container = config.container || config.element.parentElement;
+		if (typeof config.svg === 'string') {
+			this.svg = document.querySelector(config.svg);
+		}
+		else {
+			this.svg = config.svg;
+		}
+		this.container = config.container || this.svg;
 		this.resized = config.resized;
 
 		this.original = {};
 		[this.original.left, this.original.top, this.original.width, this.original.height] =
-			this.element.getAttribute('viewBox').split(' ').map(Number);
+			this.svg.getAttribute('viewBox').split(' ').map(Number);
 		this.original.bottom = this.original.top + this.original.height;
 		this.original.right = this.original.left + this.original.width;
 
@@ -34,7 +39,7 @@ class SvgMaximize {
 		}
 
 		// Perform the resize
-		this.element.setAttribute('viewBox', `${this.current.left} ${this.current.top} ${this.current.width} ${this.current.height}`);
+		this.svg.setAttribute('viewBox', `${this.current.left} ${this.current.top} ${this.current.width} ${this.current.height}`);
 
 		// Perform the callback
 		this.resized && this.resized.call(this);
