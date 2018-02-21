@@ -64,3 +64,20 @@ var svg = new SvgViewboxMaximize({
 This will cause the viewbox to be recalculated anytime the SVG element is forced to resize due to the browser viewport changing. The updated viewbox coordinates can be accessed inside the `resized` callback via `this.current` or outside the callback using the saved instance - `svg.current`.
 
 ### API
+#### `new SvgViewboxMaximize({ svg, resized, container })`
+Constructor - begins monitoring of SVG. Config parameters:
+* [Element](https://developer.mozilla.org/en-US/docs/Web/API/Element) or String `svg` - SVG element in the DOM to monitor and resize. If a String is provided, it is treated as a CSS selector which finds an element with [document.querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector).
+* Function `resized` - Callback function which is invoked at page load and anytime window is resized.
+* Element `container` - If provided, SVG viewbox is sized to `container` instead of itself.
+
+#### `svg.containerRatio`
+Returns the current ratio of height / width of the SVG container.
+
+#### `svg.svgX(viewportX)`
+Converts window viewport x-coordinate to SVG viewbox x-coordinate.
+
+#### `svg.svgY(viewportY)`
+Converts window viewport y-coordinate to SVG viewbox y-coordinate.
+
+#### `svg.rectangle(element)`
+For a DOM element, returns the SVG coordinate rectangle (top, bottom, left, right, height, width).
