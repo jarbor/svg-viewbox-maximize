@@ -46,7 +46,8 @@ class SvgMaximize {
 	}
 
 	get containerRatio() {
-		return this.container.clientWidth / this.container.clientHeight;
+		let contentBox = new ElementCoordinates(this.container).contentBox;
+		return contentBox.width / contentBox.height;
 	}
 
 	svgX(viewportX) {

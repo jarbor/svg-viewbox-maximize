@@ -105,19 +105,24 @@ function () {
   function SvgMaximize(config) {
     _classCallCheck(this, SvgMaximize);
 
-    this.element = config.element;
-    this.container = config.container || config.element;
+    if (typeof config.svg === 'string') {
+      this.svg = document.querySelector(config.svg);
+    } else {
+      this.svg = config.svg;
+    }
+
+    this.container = config.container || this.svg;
     this.resized = config.resized;
     this.original = {};
 
-    var _element$getAttribute = this.element.getAttribute('viewBox').split(' ').map(Number);
+    var _svg$getAttribute$spl = this.svg.getAttribute('viewBox').split(' ').map(Number);
 
-    var _element$getAttribute2 = _slicedToArray(_element$getAttribute, 4);
+    var _svg$getAttribute$spl2 = _slicedToArray(_svg$getAttribute$spl, 4);
 
-    this.original.left = _element$getAttribute2[0];
-    this.original.top = _element$getAttribute2[1];
-    this.original.width = _element$getAttribute2[2];
-    this.original.height = _element$getAttribute2[3];
+    this.original.left = _svg$getAttribute$spl2[0];
+    this.original.top = _svg$getAttribute$spl2[1];
+    this.original.width = _svg$getAttribute$spl2[2];
+    this.original.height = _svg$getAttribute$spl2[3];
     this.original.bottom = this.original.top + this.original.height;
     this.original.right = this.original.left + this.original.width;
     this.current = Object.assign({}, this.original);
@@ -144,7 +149,7 @@ function () {
       } // Perform the resize
 
 
-      this.element.setAttribute('viewBox', "".concat(this.current.left, " ").concat(this.current.top, " ").concat(this.current.width, " ").concat(this.current.height)); // Perform the callback
+      this.svg.setAttribute('viewBox', "".concat(this.current.left, " ").concat(this.current.top, " ").concat(this.current.width, " ").concat(this.current.height)); // Perform the callback
 
       this.resized && this.resized.call(this);
     }
@@ -176,7 +181,8 @@ function () {
   }, {
     key: "containerRatio",
     get: function get() {
-      return this.container.clientWidth / this.container.clientHeight;
+      var contentBox = new _elementCoordinates.default(this.container).contentBox;
+      return contentBox.width / contentBox.height;
     }
   }]);
 
