@@ -1,6 +1,6 @@
 {
   "name": "svg-viewbox-maximize",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Resize SVG viewBox coordinate system to cover container element. Also includes a utility for translating between page coordinates and SVG coordinates.",
   "main": "svg-viewbox-maximize.js",
   "repository": {
