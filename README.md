@@ -37,12 +37,12 @@ yarn add svg-viewbox-maximize
 
 ### ES6
 ```js
-import ElementCoordinates from 'svg-viewbox-maximize';
+import SvgViewboxMaximize from 'svg-viewbox-maximize';
 ```
 
 ### CommonJS
 ```js
-var ElementCoordinates = require('svg-viewbox-maximize');
+var SvgViewboxMaximize = require('svg-viewbox-maximize');
 ```
 
 ### Global Script Include
